@@ -10,8 +10,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import type { Event } from './Utils';
 
 type Props = {
-  onDateSelected: Date => void,
+  onDateSelected: (Date) => void,
   initDate: Date,
+  itemTextColor?: string,
 };
 
 type State = {
@@ -33,11 +34,17 @@ export default class DatePicker extends React.Component<Props, State> {
   };
 
   render() {
+    const {
+      props: { itemTextColor },
+      state: { chosenDate },
+    } = this;
+
     return (
       <DateTimePicker
         style={styles.picker}
-        value={this.state.chosenDate}
+        value={chosenDate}
         onChange={this.setDate}
+        textColor={itemTextColor}
         {...this.props}
       />
     );
