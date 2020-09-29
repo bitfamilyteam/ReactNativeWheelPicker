@@ -117,7 +117,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
 
   renderAm() {
     const {
-      props: { itemTextColor, selectedItemTextColor, style, itemTextColor },
+      props: { selectedItemTextColor, style, itemTextColor },
       state: { selectedAmIndex },
     } = this;
     return (
