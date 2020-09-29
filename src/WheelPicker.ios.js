@@ -48,14 +48,9 @@ export default class WheelPicker extends React.Component<Props, State> {
     }
 
     return (
-      <Picker
-        {...pickerProps}
-        selectedValue={data[this.state.selectedItem]}
-        onValueChange={this.onItemSelected}
-        color={itemTextColor}
-      >
+      <Picker {...pickerProps} selectedValue={data[this.state.selectedItem]} onValueChange={this.onItemSelected}>
         {this.props.data.map((i, index) => (
-          <Picker.Item key={index} label={label ? label(i) : i} value={i} />
+          <Picker.Item key={index} label={label ? label(i) : i} value={i} color={itemTextColor} />
         ))}
       </Picker>
     );
