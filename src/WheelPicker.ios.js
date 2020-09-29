@@ -9,8 +9,9 @@ import { requireNativeComponent, Picker, Text } from 'react-native';
 type Props = {
   data: Array<string>,
   selectedItem?: number,
-  onItemSelected?: number => void,
+  onItemSelected?: (index: number) => void,
   label?: (value: string) => string,
+  itemTextColor?: string,
 };
 
 type State = {
@@ -40,14 +41,19 @@ export default class WheelPicker extends React.Component<Props, State> {
   };
 
   render() {
-    const { data, selectedItem, onItemSelected, label, ...pickerProps } = this.props;
+    const { data, selectedItem, onItemSelected, label, itemTextColor, ...pickerProps } = this.props;
 
     if (!data) {
       return null;
     }
 
     return (
-      <Picker {...pickerProps} selectedValue={data[this.state.selectedItem]} onValueChange={this.onItemSelected}>
+      <Picker
+        {...pickerProps}
+        selectedValue={data[this.state.selectedItem]}
+        onValueChange={this.onItemSelected}
+        color={itemTextColor}
+      >
         {this.props.data.map((i, index) => (
           <Picker.Item key={index} label={label ? label(i) : i} value={i} />
         ))}

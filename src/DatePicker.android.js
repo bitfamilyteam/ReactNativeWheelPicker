@@ -23,7 +23,7 @@ type Props = {
   initDate: string,
   hours: Array<number>,
   minutes: Array<string>,
-  onDateSelected: Date => void,
+  onDateSelected: (Date) => void,
   startDate: string,
   daysCount: number,
   days: Array<number>,
@@ -32,6 +32,7 @@ type Props = {
   hideMinutes?: boolean,
   hideAM?: boolean,
   format?: string,
+  itemTextColor?: string,
 };
 
 type State = {
@@ -78,20 +79,23 @@ export default class DatePicker extends React.Component<Props, State> {
 
   render() {
     const {
-      startDate,
-      days,
-      daysCount,
-      hours,
-      minutes,
-      format24,
-      backgroundColor,
-      hideDate,
-      hideHours,
-      hideMinutes,
-      hideAM,
-      format,
-    } = this.props;
-    const { initHourInex, initDayInex, initMinuteInex } = this.state;
+      props: {
+        startDate,
+        days,
+        daysCount,
+        hours,
+        minutes,
+        format24,
+        backgroundColor,
+        hideDate,
+        hideHours,
+        hideMinutes,
+        hideAM,
+        format,
+        itemTextColor,
+      },
+      state: { initHourInex, initDayInex, initMinuteInex },
+    } = this;
     return (
       <View style={[styles.container, { backgroundColor }]}>
         {!hideDate && (
@@ -101,6 +105,7 @@ export default class DatePicker extends React.Component<Props, State> {
             data={days || pickerDateArray(startDate, daysCount, format)}
             onItemSelected={this.onDaySelected}
             initPosition={initDayInex}
+            itemTextColor={itemTextColor}
           />
         )}
         {!hideHours && (
@@ -111,6 +116,7 @@ export default class DatePicker extends React.Component<Props, State> {
             data={hours || getHoursArray(format24)}
             onItemSelected={this.onHourSelected}
             initPosition={initHourInex}
+            itemTextColor={itemTextColor}
           />
         )}
         {!hideMinutes && (
@@ -121,6 +127,7 @@ export default class DatePicker extends React.Component<Props, State> {
             data={minutes || getMinutesArray()}
             onItemSelected={this.onMinuteSelected}
             initPosition={initMinuteInex}
+            itemTextColor={itemTextColor}
           />
         )}
         {!this.props.format24 && !hideAM && this.renderAm()}
@@ -129,7 +136,10 @@ export default class DatePicker extends React.Component<Props, State> {
   }
 
   renderAm() {
-    const { initAmInex } = this.state;
+    const {
+      props: { itemTextColor },
+      state: { initAmInex },
+    } = this;
     return (
       <WheelPicker
         style={styles.wheelPicker}
@@ -137,6 +147,7 @@ export default class DatePicker extends React.Component<Props, State> {
         data={getAmArray()}
         onItemSelected={this.onAmSelected}
         initPosition={initAmInex}
+        itemTextColor={itemTextColor}
       />
     );
   }

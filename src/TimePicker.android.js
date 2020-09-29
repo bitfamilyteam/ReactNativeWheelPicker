@@ -12,9 +12,10 @@ const { RNDeviceTimeFormat } = NativeModules;
 
 type Props = {|
   initTime: string,
-  onTimeSelected: Date => void,
+  onTimeSelected: (Date) => void,
   minuteInterval?: number,
   style?: any,
+  itemTextColor?: string,
 |};
 
 type State = {|
@@ -83,7 +84,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
 
   render() {
     const {
-      props: { style },
+      props: { style, itemTextColor },
       state: { hours, selectedHourIndex, minutes, selectedMinuteIndex },
     } = this;
 
@@ -97,6 +98,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
           onItemSelected={this.onHourSelected}
           selectedItem={selectedHourIndex}
           initPosition={selectedHourIndex}
+          itemTextColor={itemTextColor}
         />
         <WheelPicker
           style={style}
@@ -106,6 +108,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
           onItemSelected={this.onMinuteSelected}
           selectedItem={selectedMinuteIndex}
           initPosition={selectedMinuteIndex}
+          itemTextColor={itemTextColor}
         />
         {!this.state.format24 && this.renderAm()}
       </View>
@@ -114,7 +117,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
 
   renderAm() {
     const {
-      props: { itemTextColor, selectedItemTextColor, style },
+      props: { itemTextColor, selectedItemTextColor, style, itemTextColor },
       state: { selectedAmIndex },
     } = this;
     return (
@@ -125,6 +128,7 @@ export default class TimePicker extends React.PureComponent<Props, State> {
         onItemSelected={this.onAmSelected}
         selectedItem={selectedAmIndex}
         initPosition={selectedAmIndex}
+        itemTextColor={itemTextColor}
       />
     );
   }
