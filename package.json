@@ -22,9 +22,10 @@
     "url": "https://github.com/ElekenAgency/ReactNativeWheelPicker/issues"
   },
   "homepage": "https://github.com/ElekenAgency/ReactNativeWheelPicker",
-  "dependencies": {
-    "@react-native-community/datetimepicker": "3.0.3",
+  "peerDependencies": {
     "moment": "2.29.0",
-    "react-native-device-time-format": "git+https://github.com/bitfamilyteam/react-native-device-time-format.git"
+    "react-native-device-time-format": "git+https://github.com/bitfamilyteam/react-native-device-time-format.git",
+    "@react-native-community/datetimepicker": "3.0.3",
+    "@react-native-community/picker": "^1.8.0"
   }
 }
