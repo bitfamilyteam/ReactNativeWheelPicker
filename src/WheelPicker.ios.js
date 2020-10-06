@@ -4,7 +4,7 @@
  * */
 
 import React from 'react';
-import { requireNativeComponent, Picker, Text } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 
 type Props = {
   data: Array<string>,
