@@ -31,9 +31,9 @@ export default class WheelPicker extends React.Component<Props> {
   };
 
   render() {
-    const { itemTextColor, selectedItemTextColor = itemTextColor } = this.props;
+    const { itemTextColor, selectedItemTextColor = itemTextColor, display, ...restProps } = this.props;
     return (
-      <WheelPickerView {...this.props} selectedItemTextColor={selectedItemTextColor} onChange={this.onItemSelected} />
+      <WheelPickerView {...restProps} selectedItemTextColor={selectedItemTextColor} onChange={this.onItemSelected} />
     );
   }
 }
